@@ -12,11 +12,11 @@ static const char *TAG = "RPR-0521rs";
 #define I2C_MASTER_RX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
 #define I2C_MASTER_TIMEOUT_MS 1000
 
-#define ALS_DATA0_LSB_REG 0x46 // ALS DATA0 測定結果(low byte)
+#define ALS_DATA0_LSB_REG 0x46 // RPR0521RSセンサーのALSデータレジスタの低位バイト(LSB)のアドレス
 #define RPR0521RS_ADDR 0x38
 #define ACK_CHECK_EN 0x1
 
-static esp_err_t read_als_value(uint16_t *als_value)
+static esp_err_t read_als_data0_value(uint16_t *als_value)
 {
     uint8_t data_rd[2] = {0};
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
@@ -72,11 +72,21 @@ esp_err_t configure_rpr0521rs(i2c_port_t i2c_num, uint8_t reg_addr, uint8_t valu
 
 esp_err_t rpr0521_init(void)
 {
+    // MODE_CONTROLの設定値
+    // ALS_EN:ALS 測定オン
+    // PS_EN:PS スタンバイ
+    // PS_PULSE:PS LED パルス幅 typ:200us
+    // PS Operating mode:ノーマルモード
+    // Measurement time:ALS(400ms) PS(standby)
     if (configure_rpr0521rs(I2C_MASTER_NUM, 0x41, 0x8A) != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to configure MODE_CONTROL");
         return ESP_FAIL;
     }
+    // ALS_PS_CONTROLの設定値(default value 0x02)
+    // ALS DATA0 GAIN:ALS Gain x1
+    // ALS DATA1 GAIN:ALS Gain x1
+    // LED CURRENT:100mA
     if (configure_rpr0521rs(I2C_MASTER_NUM, 0x42, 0x02) != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to configure ALS_PS_CONTROL");
@@ -94,15 +104,11 @@ void app_main(void)
     while (count < 15)
     {
         uint16_t als_value;
-        esp_err_t ret = read_als_value(&als_value);
+        esp_err_t ret = read_als_data0_value(&als_value);
         if (ret == ESP_OK)
-        {
             ESP_LOGI(TAG, "ALS Reading: %d lux", als_value);
-        }
         else
-        {
-            ESP_LOGE(TAG, "Failed to read ALS value: %s", esp_err_to_name(ret));
-        }
+            ESP_LOGE(TAG, "Failed to read ALS value");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
         count++;
     }
