@@ -1,0 +1,15 @@
+I (335) RPR-0521rs: ALS Reading: 1267 lux
+I (1335) RPR-0521rs: ALS Reading: 1266 lux
+I (2335) RPR-0521rs: ALS Reading: 1261 lux
+I (3335) RPR-0521rs: ALS Reading: 1263 lux
+I (4335) RPR-0521rs: ALS Reading: 1263 lux
+I (5335) RPR-0521rs: ALS Reading: 1264 lux
+I (6335) RPR-0521rs: ALS Reading: 1265 lux
+I (7335) RPR-0521rs: ALS Reading: 1266 lux
+I (8335) RPR-0521rs: ALS Reading: 1267 lux
+I (9335) RPR-0521rs: ALS Reading: 1267 lux
+I (10335) RPR-0521rs: ALS Reading: 1268 lux
+I (11335) RPR-0521rs: ALS Reading: 1268 lux
+I (12335) RPR-0521rs: ALS Reading: 1267 lux
+I (13335) RPR-0521rs: ALS Reading: 1267 lux
+I (14335) RPR-0521rs: ALS Reading: 1269 lux

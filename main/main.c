@@ -87,6 +87,11 @@ static esp_err_t rpr0521_init(void)
     // ALS DATA0 GAIN:ALS Gain x1
     // ALS DATA1 GAIN:ALS Gain x1
     // LED CURRENT:100mA
+    // 補足：ALS DATA0 GAIN(感度や増幅率)を変化させた場合に対応した設定値は次のようになる。※ LED CURRENTなどその他の設定は同じ
+    // ALS Gain x1：0x02
+    // ALS Gain x2：0x12
+    // ALS Gain x64：0x22
+    // ALS Gain x128：0x32
     if (configure_rpr0521rs(I2C_MASTER_NUM, 0x42, 0x02) != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to configure ALS_PS_CONTROL");
