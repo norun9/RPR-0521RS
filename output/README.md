@@ -1,6 +1,6 @@
-GAIN（感度や増幅率）設定に基づいてディレクトリが分類され、各ディレクトリ内には照明条件に応じた観察結果ファイルが存在します。
+Based on the GAIN (sensitivity or amplification) settings, directories are categorized, and each directory contains observation result files corresponding to different lighting conditions.
 
-| GAIN 設定 | 明るい部屋        | 薄暗い部屋     | 真暗な状態 |
+| GAIN Setting | Bright Room        | Dim Room     | Dark Room |
 | --------- | ----------------- | -------------- | ---------- |
 | gain_x1   | bright_indoor.txt | dim_indoor.txt | dark.txt   |
 | gain_x2   | bright_indoor.txt | dim_indoor.txt | dark.txt   |
